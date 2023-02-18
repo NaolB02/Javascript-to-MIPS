@@ -37,14 +37,24 @@ class PageOne(tk.Frame):
     def next_page(self):
         self.next_page_callback()
 
+    def next_page(self, text=""):
+        self.next_page_callback(text)
+
     def choose_file(self):
         file_path = filedialog.askopenfilename()
-        print(file_path)
+        # print(file_path)
+
+        file1 = open(rf"{file_path}", "r+")
+        text = file1.read()
+        self.next_page(text)
+
+        
 
 class PageTwo(tk.Frame):
     def __init__(self, master, prev_page_callback):
         super().__init__(master, width=1000, height=600)
         self.prev_page_callback = prev_page_callback
+        
 
         # Create the widgets for the second page
         self.button_style = {'background': '#007bff', 'foreground': 'white', 'font': ('Arial', 14)}
@@ -139,6 +149,11 @@ class PageTwo(tk.Frame):
     def prev_page(self):
         self.prev_page_callback()
 
+    def show_page_two(self, text):
+        self.page_two.input_text.insert("1.0",text)
+        self.page_two.pack(fill=tk.BOTH, expand=True)
+        self.page_one.pack_forget()
+
     def compile_code(self):
         # Get the input code from the text area
         code = self.input_text.get("1.0", "end-1c")
@@ -179,7 +194,7 @@ class MainApplication(tk.Frame):
         self.page_one.pack(fill=tk.BOTH, expand=True)
         self.page_two.pack_forget()
 
-    def show_page_two(self):
+    def show_page_two(self, text):
         self.page_two.pack(fill=tk.BOTH, expand=True)
         self.page_one.pack_forget()
 
