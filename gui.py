@@ -34,12 +34,15 @@ class PageOne(tk.Frame):
         self.button1_window = self.canvas.create_window(180, 360, anchor='nw', window=self.button1)
         self.button2_window = self.canvas.create_window(420, 360, anchor='nw', window=self.button2)
 
-    def next_page(self):
-        self.next_page_callback()
+    def next_page(self, text=""):
+        self.next_page_callback(text)
     
     def choose_file(self):
         file_path = filedialog.askopenfilename()
-        print(file_path)
+        file1 = open(rf"{file_path}", "r+")
+        text = file1.read()
+        self.next_page(text)
+        
 
 class PageTwo(tk.Frame):
     def __init__(self, master, prev_page_callback):
@@ -106,7 +109,8 @@ class MainApplication(tk.Frame):
         self.page_one.pack(fill=tk.BOTH, expand=True)
         self.page_two.pack_forget()
 
-    def show_page_two(self):
+    def show_page_two(self, text):
+        self.page_two.input_text.insert("1.0",text)
         self.page_two.pack(fill=tk.BOTH, expand=True)
         self.page_one.pack_forget()
 
