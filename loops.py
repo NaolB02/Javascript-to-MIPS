@@ -155,7 +155,8 @@ while (i < 10) {
 # Convert the while loop to MIPS
 mips_code = while_to_mips(second_js_code)
 
-# print(mips_code)
+
+
 # Print the generated MIPS code
 for line in mips_code:
     print(line)
