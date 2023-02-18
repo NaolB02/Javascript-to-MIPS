@@ -1,5 +1,7 @@
 import pyjsparser
 from pyjsparser import parse
+
+
 def while_to_mips(js_code):
     # Parse the JavaScript code using Pyjsparser
     ast = pyjsparser.parse(js_code)
@@ -146,14 +148,21 @@ print(mips_code)
 second_js_code = """
 let i = 0;
 while (i < 10) {
-  console.log(i);
-  i++;
+  
 }
 """
 
 # Convert the while loop to MIPS
 mips_code = while_to_mips(second_js_code)
 
+
+
 # Print the generated MIPS code
 for line in mips_code:
     print(line)
+
+
+print("--------------------------------------------------------------------------------------------------------------------")
+
+
+print(for_to_mips(js_code))
